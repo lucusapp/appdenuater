@@ -1,49 +1,55 @@
-<div class="mat-elevation-z8">
-    <table mat-table top [dataSource]="dataSource">
-  
-      <!-- Position Column -->
-      <ng-container matColumnDef="accion">
-        <th mat-header-cell *matHeaderCellDef> Accion</th>
-        <td mat-cell *matCellDef="let element"> {{productos.accion}} </td>
-      </ng-container>
-  
-      <!-- Name Column -->
-      <ng-container matColumnDef="titulo">
-        <th mat-header-cell *matHeaderCellDef> Titulo </th>
-        <td mat-cell *matCellDef="let element"> {{productos.titulo}} </td>
-      </ng-container>
-  
-      <!-- Weight Column -->
-      <ng-container matColumnDef="precio">
-        <th mat-header-cell *matHeaderCellDef> Precio </th>
-        <td mat-cell *matCellDef="let element"> {{productos.precio}} </td>
-      </ng-container>
-  
-      <!-- Symbol Column -->
-      <ng-container matColumnDef="marca">
-        <th mat-header-cell *matHeaderCellDef> Marca</th>
-        <td mat-cell *matCellDef="let element"> {{productos.marca}} </td>
-      </ng-container>
-      
-      <ng-container matColumnDef="categoria">
-          <th mat-header-cell *matHeaderCellDef> Categoria</th>
-          <td mat-cell *matCellDef="let element"> {{productos.categoria}} </td>
-        </ng-container>
-
-      <ng-container matColumnDef="caracteristicas">
-            <th mat-header-cell *matHeaderCellDef> Caracteristicas</th>
-            <td mat-cell *matCellDef="let element"> {{productos.caracteristicas}} </td>
-        </ng-container> 
-      <ng-container matColumnDef="imagenes">
-            <th mat-header-cell *matHeaderCellDef> Caracteristicas</th>
-            <td mat-cell *matCellDef="let element"> {{productos.imagenes}} </td>
-      </ng-container> 
-
-
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
-  
-    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+<div class="titulo">
+    <div class="row">
+      <h3>Inventario de Productos</h3>
+    </div>
+    <div class="row">
+      <div class="input-group">
+        <button
+          class="btn btn-danger"
+          (click)="excel()"
+          type="submit"
+        >
+          <i class="fas fa-file-csv"></i>
+          CSV
+        </button>
+      </div>
+    </div>
   </div>
+  
+  <table class="table mt-4">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Accion</th>
+        <th scope="col">Titulo</th>
+        <th scope="col">Precio</th>
+        <th scope="col">Marca</th>
+        <th scope="col">Categoria</th>
+        <th scope="col">Caracteristicas</th>
+        <th scope="col">Imagenes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let producto of productos; let i=index">
+        <th scope="row">{{i+1}}</th>
+        <td>{{producto.accion}}</td>
+        <td>{{producto.titulo |slice:0:25}}</td>
+        <td>{{producto.precio}}</td>
+        <td>{{producto.marca}}</td>
+        <td>{{producto.categoria}}</td>
+        <td>{{producto.caracteristicas |slice:0:150}}</td>
+        <td>
+          <button
+            class="btn btn-info mr-1"
+            [routerLink]="['/ebay/datos',producto.id]"
+          >
+            <i class="fa fa-pen"></i>
+          </button>
+          <button class="btn btn-danger " (click)="borrarProducto(producto)">
+            <i class="fa fa-trash"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
   

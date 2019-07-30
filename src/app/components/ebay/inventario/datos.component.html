@@ -1,0 +1,171 @@
+<hr />
+
+<div class="titulo">
+  <div class="row">
+    <h3>Producto &nbsp;<small>{{producto.titulo}}</small></h3>
+  </div>
+
+  <div class="row">
+    <div class="input-group">
+      <button
+        class="btn btn-success"
+        routerLink="/ebay/inventario"
+        type="submit"
+      >
+        <i class="fa fa-arraw-left"></i>
+        REGRESAR
+      </button>
+    </div>
+  </div>
+</div>
+
+<form [formGroup]="forma" (ngSubmit)="enviar()">
+  <div class="row d-flex flex-fill mt-5 ">
+      <div class="d-flex flex-fill  flex-column bd-highlight mb-1">
+          <div class="form-group row">
+        <label class="col-2 col-form-label">Id</label>
+        <div class="col-8">
+          <input
+          class="form-control"
+          type="text"
+          placeholder="ID"
+          formControlName="id"
+          [(ngModel)]="producto.id"
+          name="id"
+          [attr.disabled]="true"
+          />
+          <small class="form-text text-muted">Este campo es autogenerado</small>
+        </div>
+      </div>
+      
+      <div class="form-group row">
+        <label class="col-2 col-form-label">Titulo</label>
+        <div class="col-8 ">
+          <input
+          class="form-control"
+          type="text"
+          placeholder="titulo"
+          formControlName="titulo"
+          />
+        </div>
+      </div>
+      
+      <div class="form-group row">
+        <label class="col-2 col-form-label">Categoria</label>
+        <div class="col-8">
+          <input
+          class="form-control"
+          type="text"
+          placeholder="categoria"
+          formControlName="categoria"
+          />
+        </div>
+      </div>
+      
+      <div class="form-group row">
+        <label class="col-2 col-form-label">Marca</label>
+        <div class="col-8">
+          <input
+          class="form-control"
+          type="text"
+          placeholder="marca"
+          formControlName="marca"
+          />
+        </div>
+      </div>
+      
+      <div class="form-group row">
+        <label class="col-2 col-form-label">Precio</label>
+        <div class="col-md-8">
+          <input
+          class="form-control"
+          type="text"
+          placeholder="precio"
+          formControlName="precio"
+          />
+        </div>
+      </div>
+      
+      <div class="form-group row">
+        <label class="col-2 col-form-label">Caracteristicas</label>
+        <div class="col-md-8">
+          <textarea
+          type="text"
+          rows="5"
+          class="form-control"
+          type="caracteristicas"
+          placeholder="caracteristicas"
+          formControlName="caracteristicas"
+          >
+        </textarea>
+      </div>
+    </div>
+  </div>
+
+
+
+    <div class="d-flex flex-fill bd-highlight mb-3">
+      <!-- <div *ngFor="let imagen of imagenes" class="form-group row"> -->
+        <label class="col-2 col-form-label">Imagenes</label>
+        <div class="d-flex flex-column col-8" formArrayName="imagenes">
+          <input
+          *ngFor="let imagen of forma.controls['imagenes'].value; let i =index"
+          [formControlName]="i"
+          class="form-control"
+          type="text"
+          placeholder="imagenes"
+          />
+          <div class="d-flex flex-column">
+            <button
+            (click)="agregarImagen()"
+            type="button"
+            class="btn btn-primary"
+            >
+            Agregar imagen
+          </button>
+        </div>
+      <div class="row d-flex mt-5">
+        <div class="row d-flex mr-2" *ngFor="let imagen of imagenes">
+          <div class="d-flex flex-column ml-5">
+            <img
+            [src]="imagen"
+            class="form-group row"
+            alt="..."
+            width="100"
+            height="100"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+ 
+    </div>
+    <!-- </div> -->
+
+    
+
+      <!-- <div class="d-flex flex-column mb-3">
+        <img *ngFor="let imagen of Imagenes" class="form-group row" alt="..." />
+      </div> -->
+    </div>
+  <hr />
+
+  <div class="d-flex justify-content-center">
+    <div class="row">
+      <div class="form-group row">
+        <label class="col-2 col-form-label">&nbsp;</label>
+        <div class="input-group">
+          <button
+            routerLink="/ebay/datos/nuevo"
+            type="submit"
+            class="btn btn-primary"
+          >
+            ENVIAR
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  {{producto|json}} {{producto.id|json}}
+</form>
+

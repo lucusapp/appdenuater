@@ -14,6 +14,21 @@ export class EbayService {
 
   getInventario (){
     return this.http.get(this.UrlApi2)
+    .pipe(map(data=>{
+      return data['producto']
+    }))
+  }
+
+  postproducto(producto){
+    return this.http.post(this.UrlApi,producto)     
+    }
+
+  putproducto(producto){
+      return this.http.post(this.UrlApi,`/$(producto._id)`,producto)     
+      }
+  deleteproducto(_id){
+      return this.http.post(this.UrlApi,`/$(_id)`,)     
+        }
   }
   //  let  params = new HttpParams().append('limit','2');
   //  params = params.append('offser','0');
@@ -29,5 +44,5 @@ export class EbayService {
   //     params,
   //     headers
   //  });
-  }
+  
 // }

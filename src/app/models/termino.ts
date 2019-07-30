@@ -1,10 +1,15 @@
 export class interproductos {
-    '_id': string;
+    'id': string;
     'accion': string;
     'titulo': string;
     'marca': string;
     'precio': string;
     'categoria': string;
     'caracteristicas': string;
-    'imagenes': string;
+    'imagenes': [];
+    'Imagenes': any
+}
+
+export class picture{
+    'pruebaimg':string
 }

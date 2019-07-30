@@ -10,6 +10,14 @@ hr {
     border-color: white;
 }
 
+.titulo{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+
+}
+
 .puntero {
     cursor: pointer;
 }

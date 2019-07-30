@@ -12,12 +12,16 @@ import { EbayComponent } from './components/ebay/ebay.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
 
 
+import {InventarioService} from './service/inventario.service';
 import {EbayService} from './service/ebay.service';
 import {ScrapeService} from './service/scrape.service';
 import {TokenInterceptorService} from './service/token-interceptor.service';
 
 import { InventarioComponent } from './components/ebay/inventario/inventario.component';
 import { PedidosComponent } from './components/ebay/inventario/pedidos.component';
+import { DatosComponent } from './components/ebay/inventario/datos.component';
+
+
 import { MaterialModule } from './material/material.module'
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -31,6 +35,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     NavbarComponent,
     InventarioComponent,
     PedidosComponent,
+    DatosComponent
 
   
   ],
@@ -41,13 +46,15 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    RouterModule
   
   ],
   providers: [
     ScrapeService,
     EbayService,
-    TokenInterceptorService
+    TokenInterceptorService,
+    InventarioService
   ],
   bootstrap: [AppComponent]
 })

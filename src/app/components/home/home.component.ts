@@ -56,7 +56,7 @@ export class HomeComponent implements OnInit{
     this.scrape.getSuducto()
     .subscribe((data)=>{
       this.productos=(data);
-      this.imagenes=(data.imagenes).split(',')
+      this.imagenes=(data.imagenes).split(',');
     //console.log(this.productos);
     //console.log(this.imagenes);
     this.forma.patchValue(this.productos)
