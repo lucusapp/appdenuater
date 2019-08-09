@@ -34,7 +34,7 @@
           name="id"
           [attr.disabled]="true"
           />
-          <small class="form-text text-muted">Este campo es autogenerado</small>
+          <small class="form-text text-muted">Este campo es autogenerado {{producto.id}}</small>
         </div>
       </div>
       
@@ -79,9 +79,11 @@
         <div class="col-md-8">
           <input
           class="form-control"
-          type="text"
+          type="number"
           placeholder="precio"
           formControlName="precio"
+          [(ngModel)]="producto.precio"
+          step=".01"
           />
         </div>
       </div>
@@ -108,18 +110,22 @@
       <!-- <div *ngFor="let imagen of imagenes" class="form-group row"> -->
         <label class="col-2 col-form-label">Imagenes</label>
         <div class="d-flex flex-column col-8" formArrayName="imagenes">
-          <input
-          *ngFor="let imagen of forma.controls['imagenes'].value; let i =index"
-          [formControlName]="i"
-          class="form-control"
-          type="text"
-          placeholder="imagenes"
-          />
+          <div class="d-flex" *ngFor="let imagen of forma.controls['imagenes'].value; let i =index">
+            <input   
+            [formControlName]="i"
+            class="form-control"
+            type="text"
+            placeholder="imagenes"
+            /> 
+            <button class="btn btn-danger ml-2" (click)="borrarImagen(i)">
+              <i class="fa fa-trash"></i>
+            </button>
+          </div>
           <div class="d-flex flex-column">
             <button
             (click)="agregarImagen()"
             type="button"
-            class="btn btn-primary"
+            class="btn btn-primary mt-1"
             >
             Agregar imagen
           </button>
@@ -138,34 +144,163 @@
         </div>
       </div>
     </div>
+    </div>
  
-    </div>
-    <!-- </div> -->
 
+ 
+
+    <div class="d-flex flex-fill bd-highlight mb-3">
+            <label class="col-2 col-form-label">Talla</label> 
+            <div class="col-md-8" formArrayName="tallas"
+                *ngFor="let talla of forma.get('tallas').controls;let i =index;">
+                <div [formGroupName]="i">
+
+
+                <input 
+                class="form-control"
+                type="number"
+                placeholder="talla"
+                formControlName="talla"
+                />
+                <input 
+                class="form-control"
+                type="number"
+                placeholder="cantidad"
+                formControlName="cantidad"
+                />
+
+
+
+              </div>
+
+                <div class="d-flex flex-column">
+                  <button 
+                  (click)="agregartalla()"
+                  type="button"
+                  class="btn-primary mt-2">
+                  <i class="fa fa-plus"></i>
+                </button>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+             
     
-
-      <!-- <div class="d-flex flex-column mb-3">
-        <img *ngFor="let imagen of Imagenes" class="form-group row" alt="..." />
-      </div> -->
-    </div>
-  <hr />
-
-  <div class="d-flex justify-content-center">
-    <div class="row">
-      <div class="form-group row">
-        <label class="col-2 col-form-label">&nbsp;</label>
-        <div class="input-group">
-          <button
+    <div class="d-flex justify-content-center">
+      <div class="row">
+        <div class="form-group row">
+          <label class="col-2 col-form-label">&nbsp;</label>
+          <div class="input-group">
+            <button
             routerLink="/ebay/datos/nuevo"
             type="submit"
             class="btn btn-primary"
-          >
+            >
             ENVIAR
           </button>
         </div>
       </div>
     </div>
   </div>
-  {{producto|json}} {{producto.id|json}}
-</form>
+  <hr />
+  
+  
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Nº</th>
+        <th scope="col">Fecha</th>
+        <th scope="col">Precio</th>
+        <th scope="col">PreCompra</th>
+        <th scope="col">comiPay</th>
+        <th scope="col">comiEbay</th>
+        <th scope="col">Portes</th>
+        <th scope="col">margen</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of productos; let i=index">
+        <th scope="row">{{i+1}}</th>
+        <td>
+          <input
+          class="form-control"
+          type="date"
+          placeholder="fecha"
+          formControlName="fecha"
+          required
+
+          />
+        </td>
+        <td><input
+          class="form-control"
+          type="number"
+          placeholder="precio"
+          formControlName="precio"
+          [(ngModel)]="producto.precio"
+          step=".01"
+          /></td>
+          <td><input
+            class="form-control"
+            type="number"
+            placeholder="preCompra"
+            formControlName="preCompra"
+            step=".01"
+            required
+            /></td>
+            <td><input
+              class="form-control"
+              type="number"
+              placeholder="comiPay"
+              formControlName="comiPay"
+              step=".01"
+              required
+              />
+            </td>
+            <td>
+                <input
+                class="form-control"
+                type="number"
+                placeholder="comiEbay"
+                formControlName="comiEbay"
+                step=".01"
+                required
+                />
+            </td>
+            <td>
+                <input
+                class="form-control"
+                type="number"
+                placeholder="portes"
+                formControlName="portes"
+                step=".01"
+                required
+                />
+            </td>
+            <td>
+                <input
+                class="form-control"
+                type="number"
+                placeholder="margen"
+                formControlName="margen"
+                [attr.disabled]="true"
+                />
+              
+              </td>
+              <button (click)="agregarPrecio()"
+                      class="btn-danger mt-3">
+                <i class="fa fa-plus"></i>
+              </button>
+            </tr>
+          </tbody>
+        </table>
+      </form>
+
+
+
+
+
+
+
+  <!-- {{producto|json}} {{producto.id|json}} -->
 

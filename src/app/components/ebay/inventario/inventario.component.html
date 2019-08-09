@@ -39,15 +39,17 @@
         <td>{{producto.categoria}}</td>
         <td>{{producto.caracteristicas |slice:0:150}}</td>
         <td>
-          <button
+          <div class="flex row">
+            <button
             class="btn btn-info mr-1"
             [routerLink]="['/ebay/datos',producto.id]"
-          >
+            >
             <i class="fa fa-pen"></i>
           </button>
-          <button class="btn btn-danger " (click)="borrarProducto(producto)">
+          <button class="btn btn-danger ml-1" (click)="borrarProducto(producto)">
             <i class="fa fa-trash"></i>
           </button>
+        </div>
         </td>
       </tr>
     </tbody>
